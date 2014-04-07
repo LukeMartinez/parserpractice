@@ -1,18 +1,22 @@
 class Parser
 
-  def read_all_files_in(folder)
+  def get_all_files_in(folder)
+    @folder = folder
     Dir.foreach(folder) do |filename|
       next if filename == '.' or filename == '..'
-      read_file("./#{folder}/#{filename}")
+      puts filename
+      write_file("#{filename}")
     end
   end
 
   def read_file(filename)
-    contents = File.read(filename)
-    puts contents
+    File.read(filename)  
   end
 
-end
+  def write_file(data)
+    File.open(data, 'w') { |file| file.write(read_file("inputs/" + data)) } 
+  end
 
-p = Parser.new
+
+end
 
